@@ -6,6 +6,8 @@
 
 
 
+# EC2
+# @see http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
 
 # describe instances
 # @see http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
