@@ -9,7 +9,7 @@
 # EC2
 # @see http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
 
-# describe instances
+# EC2, describe instances
 # @see http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 
 # list all instances
@@ -23,3 +23,17 @@
 
 # create instances
 # @see http://docs.aws.amazon.com/cli/latest/reference/ec2/create-image.html
+
+
+
+
+
+# terminate instances
+@ @see http://docs.aws.amazon.com/cli/latest/reference/ec2/terminate-instances.html
+
+
+
+
+
+# delete volume
+# @see http://docs.aws.amazon.com/cli/latest/reference/ec2/delete-volume.html
