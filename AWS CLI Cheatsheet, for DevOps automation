@@ -1,0 +1,23 @@
+
+
+# @see http://docs.aws.amazon.com/cli/latest/reference/
+# @see https://github.com/toddm92/aws/wiki/AWS-CLI-Cheat-Sheet
+
+
+
+
+
+# describe instances
+# @see http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+
+# list all instances
+
+# list instances, having tag
+
+# list instances, having tag, and value
+
+
+
+
+# create instances
+# @see http://docs.aws.amazon.com/cli/latest/reference/ec2/create-image.html
