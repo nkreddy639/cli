@@ -12,7 +12,7 @@
 # EC2, describe instances
 # @see http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 
-# list all instances, get Public DNS
+# list all instances
 SERVER_LIST=$(aws ec2 describe-instances);
 
 # list instances, that are running, having tag
