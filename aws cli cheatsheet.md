@@ -49,10 +49,11 @@ SERVER_LIST_IP=$( echo $SERVER_LIST | jq '.Reservations[].Instances[].PublicIpAd
 
 ##### delete volume
 @see http://docs.aws.amazon.com/cli/latest/reference/ec2/delete-volume.html
-
-
-
-<br/>
+  
+  
+  
+  
+  
 ## IAM
 
 ##### list the age of all keys
