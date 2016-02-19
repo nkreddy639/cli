@@ -10,7 +10,7 @@
 @see http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
 
 ##### describe instances
-# @see http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
+@see http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 
 ##### list all instances
 ```shell
