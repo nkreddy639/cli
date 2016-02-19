@@ -57,8 +57,10 @@ SERVER_LIST_IP=$( echo $SERVER_LIST | jq '.Reservations[].Instances[].PublicIpAd
 
 ## IAM
 
+[Rotate Keys](http://blogs.aws.amazon.com//security/post/Tx15CIT22V4J8RP/How-to-rotate-access-keys-for-IAM-users)
+
 ##### list the age of all keys
-[source](https://evidentio.squarespace.com/blog/2015/3/20/top-10-aws-security-best-practices-6-rotate-all-the-keys-regularly)
+[Top 10 AWS Security Best Practices - #6 Rorate All Keys Regularly](https://evidentio.squarespace.com/blog/2015/3/20/top-10-aws-security-best-practices-6-rotate-all-the-keys-regularly)
 ```shell
 aws iam get-credential-report --output text | awk '{print $1}' | base64 -D | \
     awk -F, '{printf("%-15s %-25s %-25s %-25s %-25s\n",$1,$9,$10,$11,$12)}';
