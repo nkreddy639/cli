@@ -60,6 +60,6 @@ SERVER_LIST_IP=$( echo $SERVER_LIST | jq '.Reservations[].Instances[].PublicIpAd
 ##### list the age of all keys
 [source](https://evidentio.squarespace.com/blog/2015/3/20/top-10-aws-security-best-practices-6-rotate-all-the-keys-regularly)
 ```shell
-aws iam get-credential-report --output text | awk '{print $1}' | base64 -D |
+aws iam get-credential-report --output text | awk '{print $1}' | base64 -D | \
     awk -F, '{printf("%-15s %-25s %-25s %-25s %-25s\n",$1,$9,$10,$11,$12)}';
 ```
