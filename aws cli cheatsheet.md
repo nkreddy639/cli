@@ -74,10 +74,11 @@ join # combine rows of text, by initial column value
 
 
 ## Cloudtrail - Logging and Auditing
-```shell
-# http://docs.aws.amazon.com/cli/latest/reference/cloudtrail/
-# 5 Trails total, does support resource level permissions
 
+http://docs.aws.amazon.com/cli/latest/reference/cloudtrail/
+5 Trails total, with support for resource level permissions
+
+```shell
 # list all trails
 aws cloudtrail describe-trails
 
@@ -126,13 +127,12 @@ aws cloudtrail remove-tags \
 ## IAM
 
 ### Users
-http://docs.aws.amazon.com/cli/latest/reference/iam/index.html
 
 https://blogs.aws.amazon.com/security/post/Tx15CIT22V4J8RP/How-to-rotate-access-keys-for-IAM-users
-
 http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
-
 Limits = 5000 users, 100 group, 250 roles, 2 access keys / user
+
+http://docs.aws.amazon.com/cli/latest/reference/iam/index.html
 
 ```shell
 # list all user's info
@@ -182,13 +182,14 @@ done
 
 ### Password policy
 
-```shell
-# http://docs.aws.amazon.com/cli/latest/reference/iam/delete-account-password-policy.html
-aws iam delete-account-password-policy
+http://docs.aws.amazon.com/cli/latest/reference/iam/
 
+```shell
+# list policy
 # http://docs.aws.amazon.com/cli/latest/reference/iam/get-account-password-policy.html
 aws iam get-account-password-policy
 
+# set policy
 # http://docs.aws.amazon.com/cli/latest/reference/iam/update-account-password-policy.html
 aws iam update-account-password-policy \
 	--minimum-password-length 12 \
@@ -197,11 +198,18 @@ aws iam update-account-password-policy \
 	--require-uppercase-characters \
 	--require-lowercase-characters \
 	--allow-users-to-change-password
+
+# delete policy
+# http://docs.aws.amazon.com/cli/latest/reference/iam/delete-account-password-policy.html
+aws iam delete-account-password-policy
 ```
 
 
 
 ### Access Keys
+
+http://docs.aws.amazon.com/cli/latest/reference/iam/
+
 ```shell
 # list all access keys
 aws iam list-access-keys
@@ -234,9 +242,11 @@ aws iam delete-access-key \
 
 
 ### Groups, Policies, Managed Policies
-```shell
-# http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 
+http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+http://docs.aws.amazon.com/cli/latest/reference/iam/
+
+```shell
 # list all groups
 aws iam list-groups
 
@@ -307,26 +317,26 @@ aws iam delete-group \
 http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 
 ```shell
-# http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-key-pairs.html
 # list all keypairs
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-key-pairs.html
 aws ec2 describe-key-pairs
 
-# http://docs.aws.amazon.com/cli/latest/reference/ec2/create-key-pair.html
 # create a keypair
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/create-key-pair.html
 aws ec2 create-key-pair \
     --key-name <value>
 
 # create a new private / public keypair, using RSA 2048-bit
 ssh-keygen -t rsa -b 2048
 
-# http://docs.aws.amazon.com/cli/latest/reference/ec2/import-key-pair.html
 # import an existing keypair
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/import-key-pair.html
 aws ec2 import-key-pair \
     --key-name keyname_test \
     --public-key-material file:///home/apollo/id_rsa.pub
 
-# http://docs.aws.amazon.com/cli/latest/reference/ec2/delete-key-pair.html
 # delete a keypair
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/delete-key-pair.html
 aws ec2 delete-key-pair \
     --key-name <value>
 ```
@@ -335,6 +345,9 @@ aws ec2 delete-key-pair \
 
 
 ### Security Groups
+
+http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
+
 ```shell
 # list all security groups
 aws ec2 describe-security-groups
@@ -382,14 +395,16 @@ aws ec2 delete-security-group \
 
 
 ## Instances
-```shell
-# http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
-# http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 
+http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
+
+```shell
 # list all instances (running, and not running)
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 aws ec2 describe-instances
 
 # create a new instance
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 aws ec2 run-instances \
     --image-id ami-f0e7d19a \	
     --instance-type t2.micro \
@@ -397,11 +412,17 @@ aws ec2 run-instances \
     --dry-run
 
 # stop an instance
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/terminate-instances.html
 aws ec2 terminate-instances \
     --instance-ids <instance_id>
 
-# list details of an instance
-aws ec2 describe-instances
+# list status of all instances
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instance-status.html
+aws ec2 describe-instance-status
+
+# list status of a specific instance
+aws ec2 describe-instance-status \
+    --instance-ids <instance_id>
 ```
 
 
@@ -409,14 +430,17 @@ aws ec2 describe-instances
 ### Tags
 ```shell
 # list the tags of an instance
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-tags.html
 aws ec2 describe-tags
 
 # add a tag to an instance
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/create-tags.html
 aws ec2 create-tags \
     --resources "ami-1a2b3c4d" \
     --tags Key=name,Value=debian
 
 # delete a tag on an instance
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/delete-tags.html
 aws ec2 delete-tags \
     --resources "ami-1a2b3c4d" \
     --tags Key=Name,Value=
