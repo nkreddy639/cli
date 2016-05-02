@@ -45,7 +45,7 @@ aws configure
 ```
 
 ### Bash one-liners
-``shell
+```shell
 cat <file> # output a file
 tee # split output into a file
 cut -f 2 # print the 2nd column, per line
