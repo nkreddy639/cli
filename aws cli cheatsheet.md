@@ -6,6 +6,9 @@ https://www.youtube.com/watch?v=_wiGpBQGCjU
 
 
 
+
+## Setup
+
 ### Overview
 - Virtualbox
 - Ubuntu 14.04 LTS VM, 64-bit
@@ -22,7 +25,6 @@ http://releases.ubuntu.com/14.04/ubuntu-14.04.4-desktop-amd64.iso
     - Acceleration: Enable 3D Acceleration
 - boot
 - install
-
 
 ### install Virtualbox Guest Additions, passwordless sudo
 ```shell
@@ -448,7 +450,9 @@ aws logs delete-log-group \
 
 # http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-stream.html
 
-# Log group names can be between 1 and 512 characters long. Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).
+# Log group names can be between 1 and 512 characters long. Allowed
+# characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen),
+# '/' (forward slash), and '.' (period).
 
 aws logs create-log-stream \
 	--log-group-name "DefaultGroup" \
