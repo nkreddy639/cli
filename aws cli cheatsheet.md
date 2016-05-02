@@ -7,20 +7,19 @@ https://www.youtube.com/watch?v=_wiGpBQGCjU
 
 
 
-### Overview
 - Virtualbox
 - Ubuntu 14.04 LTS VM, 64-bit
 http://releases.ubuntu.com/14.04/ubuntu-14.04.4-desktop-amd64.iso
 - create new machine, settings
--- System / Processor
---- Enable PAE/NX
--- System / Acceleration
---- Paravirtualization Interface: Default
---- Enable VT-x/AMD-V
---- Enable Nested Paging
--- Display / Screen
---- Video Memory: 128MB
---- Acceleration: Enable 3D Acceleration
+   System / Processor
+      Enable PAE/NX
+   System / Acceleration
+      Paravirtualization Interface: Default
+      Enable VT-x/AMD-V
+      Enable Nested Paging
+   Display / Screen
+      Video Memory: 128MB
+      Acceleration: Enable 3D Acceleration
 - boot
 - install
 
