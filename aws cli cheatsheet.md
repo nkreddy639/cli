@@ -1,4 +1,5 @@
-# AWS Best Practices
+# AWS CLI Cheatsheet
+
 http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
 https://www.youtube.com/watch?v=_wiGpBQGCjU
 
