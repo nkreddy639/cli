@@ -200,6 +200,7 @@ aws iam update-account-password-policy \
 ```
 
 
+
 ### Access Keys
 ```shell
 # list all access keys
@@ -229,8 +230,6 @@ aws iam delete-access-key \
     --access-key-id AKIAI44QH8DHBEXAMPLE \
     --user-name aws-admin2
 ```
-
-
 
 
 
@@ -382,8 +381,7 @@ aws ec2 delete-security-group \
 
 
 
-
-## EC2 - Instances, Tags
+## Instances, Tags
 ```shell
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
@@ -418,12 +416,9 @@ aws ec2 delete-tags \
     --resources "ami-1a2b3c4d" \
     --tags Key=Name,Value=
 ```
+<br/><br/><br/>
 
 
-
-
-## Cloudwatch - Monitoring
-http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/index.html
 
 
 
@@ -445,9 +440,11 @@ aws logs describe-log-groups \
 # http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-group.html
 aws logs delete-log-group \
 	--log-group-name "DefaultGroup"
+```
 
 
-
+### Log Streams
+```shell
 # http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-stream.html
 
 # Log group names can be between 1 and 512 characters long. Allowed
@@ -473,3 +470,8 @@ aws logs delete-log-stream \
 	--log-group-name "DefaultGroup" \
 	--log-stream-name "Default Stream"
 ```
+
+
+
+## Cloudwatch - Monitoring
+http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/index.html
