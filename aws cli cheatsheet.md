@@ -434,45 +434,53 @@ aws ec2 delete-tags \
 http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html
 http://docs.aws.amazon.com/cli/latest/reference/logs/index.html#cli-aws-logs
 
+##### create a group
+http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html
 ```shell
-# http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html
 aws logs create-log-group \
 	--log-group-name "DefaultGroup"
+```
 
-# http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
+##### list all log groups
+http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
+```shell
 aws logs describe-log-groups
 
 aws logs describe-log-groups \
 	--log-group-name-prefix "Default"
+```
 
-# http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-group.html
+##### delete a group
+http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-group.html
+```shell
 aws logs delete-log-group \
 	--log-group-name "DefaultGroup"
 ```
 
 
+
 ### Log Streams
 ```shell
-# http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-stream.html
 
 # Log group names can be between 1 and 512 characters long. Allowed
 # characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen),
 # '/' (forward slash), and '.' (period).
 
+# create a log stream
+# http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-stream.html
 aws logs create-log-stream \
 	--log-group-name "DefaultGroup" \
 	--log-stream-name "syslog"
 
+# list details on a log stream
 # http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-streams.html
-
-aws logs describe-log-streams
-
 aws logs describe-log-streams \
 	--log-group-name "syslog"
 
 aws logs describe-log-streams \
 	--log-stream-name-prefix "syslog"
 
+# delete a log stream
 # http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-stream.html
 aws logs delete-log-stream \
 	--log-group-name "DefaultGroup" \
@@ -483,4 +491,3 @@ aws logs delete-log-stream \
 
 ## Cloudwatch - Monitoring
 http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/index.html
-
