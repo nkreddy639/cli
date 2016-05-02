@@ -381,7 +381,7 @@ aws ec2 delete-security-group \
 
 
 
-## Instances, Tags
+## Instances
 ```shell
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
@@ -402,7 +402,12 @@ aws ec2 terminate-instances \
 
 # list details of an instance
 aws ec2 describe-instances
+```
 
+
+
+### Tags
+```shell
 # list the tags of an instance
 aws ec2 describe-tags
 
@@ -422,7 +427,10 @@ aws ec2 delete-tags \
 
 
 
-## Cloudwatch - Logs
+## Cloudwatch
+
+
+### Log Groups
 http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html
 http://docs.aws.amazon.com/cli/latest/reference/logs/index.html#cli-aws-logs
 
@@ -475,3 +483,4 @@ aws logs delete-log-stream \
 
 ## Cloudwatch - Monitoring
 http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/index.html
+
