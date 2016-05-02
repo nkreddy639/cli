@@ -76,32 +76,41 @@ join # combine rows of text, by initial column value
 # http://docs.aws.amazon.com/cli/latest/reference/cloudtrail/
 # 5 Trails total, does support resource level permissions
 
+# list all trails
 aws cloudtrail describe-trails
 
+# list all S3 buckets
 aws s3 ls
 
+# create a new trail
 aws cloudtrail create-subscription \
     --name awslog \
     --s3-new-bucket awslog2016
 
+# list the names of all trails
 aws cloudtrail describe-trails --output text | cut -f 8
 
+# get the status of a trail
 aws cloudtrail get-trail-status \
     --name awslog
 
+# delete a trail
 aws cloudtrail delete-trail \
     --name awslog
 
+# delete the S3 bucket of a trail
 aws s3 rb s3://awslog2016 --force
 
-# add up to 10 tags
+# add tags to a trail, up to 10 tags
 aws cloudtrail add-tags \
     --resource-id awslog \
     --tags-list "Key=log-type,Value=all"
 
+# list the tags of a trail
 aws cloudtrail list-tags \
     --resource-id-list 
 
+# remove a tag from a trail
 aws cloudtrail remove-tags \
     --resource-id awslog \
     --tags-list "Key=log-type,Value=all"
@@ -173,15 +182,12 @@ done
 
 ```shell
 # http://docs.aws.amazon.com/cli/latest/reference/iam/delete-account-password-policy.html
-
 aws iam delete-account-password-policy
 
 # http://docs.aws.amazon.com/cli/latest/reference/iam/get-account-password-policy.html
-
 aws iam get-account-password-policy
 
 # http://docs.aws.amazon.com/cli/latest/reference/iam/update-account-password-policy.html
-
 aws iam update-account-password-policy \
 	--minimum-password-length 12 \
 	--require-symbols \
@@ -296,22 +302,29 @@ aws iam delete-group \
 ## EC2
 
 ### keypairs
-```shell
-# http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+
+```shell
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-key-pairs.html
+# list all keypairs
 aws ec2 describe-key-pairs
 
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/create-key-pair.html
+# create a keypair
 aws ec2 create-key-pair \
     --key-name <value>
 
 # create a new private / public keypair, using RSA 2048-bit
 ssh-keygen -t rsa -b 2048
 
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/import-key-pair.html
 # import an existing keypair
 aws ec2 import-key-pair \
     --key-name keyname_test \
     --public-key-material file:///home/apollo/id_rsa.pub
 
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/delete-key-pair.html
 # delete a keypair
 aws ec2 delete-key-pair \
     --key-name <value>
