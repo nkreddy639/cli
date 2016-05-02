@@ -24,7 +24,8 @@ http://releases.ubuntu.com/14.04/ubuntu-14.04.4-desktop-amd64.iso
 - boot
 - install
 
-# install Virtualbox Guest Additions, passwordless sudo
+### install Virtualbox Guest Additions, passwordless sudo
+```shell
 echo $USER
 sudo echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 sudo su
@@ -33,14 +34,18 @@ apt-get install -y build-essential dkms linux-headers-$(uname -r)
 cd /media/aws-admin/
 sh ./VBoxLinuxAdditions.run
 shutdown now
+```
 
-# install AWS CLI
+### install AWS CLI
+```shell
 sudo apt-get install -y python-dev python-pip
 sudo pip install awscli
 aws --version
 aws configure
+```
 
-# Bash one-liners
+### Bash one-liners
+``shell
 cat <file> # output a file
 tee # split output into a file
 cut -f 2 # print the 2nd column, per line
@@ -59,12 +64,15 @@ sort # sort data
 uniq # show only unique entries
 paste # combine rows of text, by line
 join # combine rows of text, by initial column value
+```
+<br/><br/><br/>
 
 
 
 
 
 ## Cloudtrail - Logging and Auditing
+```shell
 http://docs.aws.amazon.com/cli/latest/reference/cloudtrail/
 
 5 Trails total, does support resource level permissions
@@ -98,12 +106,16 @@ aws cloudtrail list-tags \
 aws cloudtrail remove-tags \
     --resource-id awslog \
     --tags-list "Key=log-type,Value=all"
+```
+<br/><br/><br/>
 
 
 
 
 
-## IAM - Users
+## IAM
+
+### Users
 http://docs.aws.amazon.com/cli/latest/reference/iam/index.html
 
 https://blogs.aws.amazon.com/security/post/Tx15CIT22V4J8RP/How-to-rotate-access-keys-for-IAM-users
@@ -112,6 +124,7 @@ http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
 
 Limits = 5000 users, 100 group, 250 roles, 2 access keys / user
 
+```shell
 # list all user's info
 aws iam list-users
 
@@ -153,12 +166,13 @@ for userName in $allUsers; do
     aws iam delete-user \
         --user-name $userName
 done
+```
 
 
 
+### Password policy
 
-## IAM - Password policy
-
+```shell
 http://docs.aws.amazon.com/cli/latest/reference/iam/delete-account-password-policy.html
 
 aws iam delete-account-password-policy
@@ -176,11 +190,11 @@ aws iam update-account-password-policy \
 	--require-uppercase-characters \
 	--require-lowercase-characters \
 	--allow-users-to-change-password
+```
 
 
-
-## IAM - Access Keys
-
+### Access Keys
+```shell
 aws iam list-access-keys
 
 aws iam list-access-keys \
@@ -201,13 +215,14 @@ aws iam update-access-key \
 aws iam delete-access-key \
     --access-key-id AKIAI44QH8DHBEXAMPLE \
     --user-name aws-admin2
+```
 
 
 
 
 
-## IAM - Groups, Policies, Managed Policies
-
+### Groups, Policies, Managed Policies
+```shell
 http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 
 aws iam list-groups
@@ -256,12 +271,17 @@ aws iam detach-group-policy \
 
 aws iam delete-group \
     --group-name FullAdmins
+```
+<br/><br/><br/>
 
 
 
 
 
-## EC2 - Keypairs
+## EC2
+
+### keypairs
+```shell
 http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 
 aws ec2 describe-key-pairs
@@ -278,12 +298,13 @@ aws ec2 import-key-pair \
 
 aws ec2 delete-key-pair \
     --key-name <value>
+```
 
 
 
 
-
-## EC2 - Security Groups
+### Security Groups
+```shell
 aws ec2 describe-security-groups
 
 aws ec2 create-security-group \
@@ -320,12 +341,13 @@ aws ec2 revoke-security-group-ingress \
 
 aws ec2 delete-security-group \
     --group-id sg-00000000
-
+```
 
 
 
 
 ## EC2 - Instances, Tags
+```shell
 http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
 http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 
@@ -351,7 +373,7 @@ aws ec2 create-tags \
 aws ec2 delete-tags \
     --resources "ami-1a2b3c4d" \
     --tags Key=Name,Value=
-
+```
 
 
 
@@ -365,6 +387,7 @@ http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/index.html
 http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html
 http://docs.aws.amazon.com/cli/latest/reference/logs/index.html#cli-aws-logs
 
+```shell
 http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html
 aws logs create-log-group \
 	--log-group-name "DefaultGroup"
@@ -381,15 +404,15 @@ aws logs delete-log-group \
 
 
 
-http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-stream.html
+# http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-stream.html
 
-Log group names can be between 1 and 512 characters long. Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).
+# Log group names can be between 1 and 512 characters long. Allowed characters include a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).
 
 aws logs create-log-stream \
 	--log-group-name "DefaultGroup" \
 	--log-stream-name "syslog"
 
-http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-streams.html
+# http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-streams.html
 
 aws logs describe-log-streams
 
@@ -399,7 +422,8 @@ aws logs describe-log-streams \
 aws logs describe-log-streams \
 	--log-stream-name-prefix "syslog"
 
-http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-stream.html
+# http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-stream.html
 aws logs delete-log-stream \
 	--log-group-name "DefaultGroup" \
 	--log-stream-name "Default Stream"
+```
