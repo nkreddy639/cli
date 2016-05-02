@@ -73,9 +73,8 @@ join # combine rows of text, by initial column value
 
 ## Cloudtrail - Logging and Auditing
 ```shell
-http://docs.aws.amazon.com/cli/latest/reference/cloudtrail/
-
-5 Trails total, does support resource level permissions
+# http://docs.aws.amazon.com/cli/latest/reference/cloudtrail/
+# 5 Trails total, does support resource level permissions
 
 aws cloudtrail describe-trails
 
@@ -173,15 +172,15 @@ done
 ### Password policy
 
 ```shell
-http://docs.aws.amazon.com/cli/latest/reference/iam/delete-account-password-policy.html
+# http://docs.aws.amazon.com/cli/latest/reference/iam/delete-account-password-policy.html
 
 aws iam delete-account-password-policy
 
-http://docs.aws.amazon.com/cli/latest/reference/iam/get-account-password-policy.html
+# http://docs.aws.amazon.com/cli/latest/reference/iam/get-account-password-policy.html
 
 aws iam get-account-password-policy
 
-http://docs.aws.amazon.com/cli/latest/reference/iam/update-account-password-policy.html
+# http://docs.aws.amazon.com/cli/latest/reference/iam/update-account-password-policy.html
 
 aws iam update-account-password-policy \
 	--minimum-password-length 12 \
@@ -195,23 +194,29 @@ aws iam update-account-password-policy \
 
 ### Access Keys
 ```shell
+# list all access keys
 aws iam list-access-keys
 
+# list access keys of a specific user
 aws iam list-access-keys \
     --user-name aws-admin2
 
+# create a new access key
 aws iam create-access-key \
     --user-name aws-admin2 \
     --output text | tee aws-admin2.txt
 
+# list last access time of an access key
 aws iam get-access-key-last-used \
     --access-key-id AKIAINA6AJZY4EXAMPLE
 
+# deactivate an acccss key
 aws iam update-access-key \
     --access-key-id AKIAI44QH8DHBEXAMPLE \
     --status Inactive \
     --user-name aws-admin2
 
+# delete an access key
 aws iam delete-access-key \
     --access-key-id AKIAI44QH8DHBEXAMPLE \
     --user-name aws-admin2
@@ -223,17 +228,22 @@ aws iam delete-access-key \
 
 ### Groups, Policies, Managed Policies
 ```shell
-http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+# http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 
+# list all groups
 aws iam list-groups
 
+# create a group
 aws iam create-group --group-name FullAdmins
 
+# delete a group
 aws iam delete-group \
     --group-name FullAdmins
 
+# list all policies
 aws iam list-policies
 
+# get a specific policy
 aws iam get-policy \
     --policy-arn <value>
 
@@ -245,10 +255,12 @@ aws iam list-entities-for-policy \
 aws iam list-attached-group-policies \
     --group-name FullAdmins
 
+# add a policy to a group
 aws iam attach-group-policy \
     --group-name FullAdmins \
     --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 
+# add a user to a group
 aws iam add-user-to-group \
     --group-name FullAdmins \
     --user-name aws-admin2
@@ -261,14 +273,17 @@ aws iam get-group \
 aws iam list-groups-for-user \
     --user-name aws-admin2
 
+# remove a user from a group
 aws iam remove-user-from-group \
     --group-name FullAdmins \
     --user-name aws-admin2
 
+# remove a policy from a group
 aws iam detach-group-policy \
     --group-name FullAdmins \
     --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 
+# delete a group
 aws iam delete-group \
     --group-name FullAdmins
 ```
@@ -282,7 +297,7 @@ aws iam delete-group \
 
 ### keypairs
 ```shell
-http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+# http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 
 aws ec2 describe-key-pairs
 
@@ -292,10 +307,12 @@ aws ec2 create-key-pair \
 # create a new private / public keypair, using RSA 2048-bit
 ssh-keygen -t rsa -b 2048
 
+# import an existing keypair
 aws ec2 import-key-pair \
     --key-name keyname_test \
     --public-key-material file:///home/apollo/id_rsa.pub
 
+# delete a keypair
 aws ec2 delete-key-pair \
     --key-name <value>
 ```
@@ -305,13 +322,16 @@ aws ec2 delete-key-pair \
 
 ### Security Groups
 ```shell
+# list all security groups
 aws ec2 describe-security-groups
 
+# create a security group
 aws ec2 create-security-group \
     --vpc-id vpc-1a2b3c4d \
     --group-name web-access \
     --description "web access"
 
+# list details about a securty group
 aws ec2 describe-security-groups \
     --group-id sg-0000000
 
@@ -333,12 +353,14 @@ aws ec2 authorize-security-group-ingress \
     --port 80 \
     --cidr $my_ip/24
 
+# remove a firewall rule from a group
 aws ec2 revoke-security-group-ingress \
     --group-id sg-0000000 \
     --protocol tcp \
     --port 80 \
     --cidr 0.0.0.0/24
 
+# delete a security group
 aws ec2 delete-security-group \
     --group-id sg-00000000
 ```
@@ -348,28 +370,35 @@ aws ec2 delete-security-group \
 
 ## EC2 - Instances, Tags
 ```shell
-http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
-http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html#cli-aws-ec2
+# http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 
+# list all instances (running, and not running)
 aws ec2 describe-instances
 
+# create a new instance
 aws ec2 run-instances \
     --image-id ami-f0e7d19a \	
     --instance-type t2.micro \
     --security-group-ids sg-00000000 \
     --dry-run
 
+# stop an instance
 aws ec2 terminate-instances \
     --instance-ids <instance_id>
 
+# list details of an instance
 aws ec2 describe-instances
 
+# list the tags of an instance
 aws ec2 describe-tags
 
+# add a tag to an instance
 aws ec2 create-tags \
     --resources "ami-1a2b3c4d" \
     --tags Key=name,Value=debian
 
+# delete a tag on an instance
 aws ec2 delete-tags \
     --resources "ami-1a2b3c4d" \
     --tags Key=Name,Value=
@@ -388,17 +417,17 @@ http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWat
 http://docs.aws.amazon.com/cli/latest/reference/logs/index.html#cli-aws-logs
 
 ```shell
-http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html
+# http://docs.aws.amazon.com/cli/latest/reference/logs/create-log-group.html
 aws logs create-log-group \
 	--log-group-name "DefaultGroup"
 
-http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
+# http://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html
 aws logs describe-log-groups
 
 aws logs describe-log-groups \
 	--log-group-name-prefix "Default"
 
-http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-group.html
+# http://docs.aws.amazon.com/cli/latest/reference/logs/delete-log-group.html
 aws logs delete-log-group \
 	--log-group-name "DefaultGroup"
 
