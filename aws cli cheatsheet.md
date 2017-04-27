@@ -403,6 +403,9 @@ http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html
 aws ec2 describe-instances
 
+# list all instances running
+aws ec2 describe-instances --filters Name=instance-state-name,Values=running
+
 # create a new instance
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
 aws ec2 run-instances \
