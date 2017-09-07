@@ -426,6 +426,11 @@ aws ec2 describe-instance-status
 # list status of a specific instance
 aws ec2 describe-instance-status \
     --instance-ids <instance_id>
+    
+# list instance IP addresses
+aws ec2 describe-instances \
+  --query "Reservations[*].Instances[*].PublicIpAddress" \
+  --output=text
 ```
 
 
