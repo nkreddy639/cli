@@ -394,6 +394,20 @@ aws ec2 delete-security-group \
 
 
 
+
+## Images
+
+https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
+
+```shell
+# list all private AMI's, ImageId and Name tags
+aws ec2 describe-images --filter "Name=is-public,Values=false" \
+    --query 'Images[].[ImageId, Name]' \
+    --output text | sort -k2
+
+```
+
+
 ## Instances
 
 http://docs.aws.amazon.com/cli/latest/reference/ec2/index.html
