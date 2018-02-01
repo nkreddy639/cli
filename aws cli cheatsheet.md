@@ -324,10 +324,10 @@ aws ec2 describe-key-pairs
 # create a keypair
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/create-key-pair.html
 aws ec2 create-key-pair \
-    --key-name <value>
+    --key-name <value> --output text
 
-# create a new private / public keypair, using RSA 2048-bit
-ssh-keygen -t rsa -b 2048
+# create a new local private / public keypair, using RSA 4096-bit
+ssh-keygen -t rsa -b 4096
 
 # import an existing keypair
 # http://docs.aws.amazon.com/cli/latest/reference/ec2/import-key-pair.html
