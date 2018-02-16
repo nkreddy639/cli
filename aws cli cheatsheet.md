@@ -309,6 +309,40 @@ aws iam delete-group \
 
 
 
+## S3
+
+https://docs.aws.amazon.com/cli/latest/reference/s3api/index.html#cli-aws-s3api
+
+```shell
+# list existing S3 buckets
+aws s3 ls
+
+# create a bucket name, using the current date timestamp
+bucket_name=test_$(date "+%Y-%m-%d_%H-%M-%S")
+echo $bucket_name
+
+# create a public facing bucket
+aws s3api create-bucket --acl "public-read-write" --bucket $bucket_name
+
+# verify bucket was created
+aws s3 ls | grep $bucket_name
+
+# check for public facing s3 buckets (should show the bucket name you created)
+
+aws s3api list-buckets --query 'Buckets[*].[Name]' --output text | xargs -I {} bash -c 'if [[ $(aws s3api get-bucket-acl --bucket {} --query '"'"'Grants[?Grantee.URI==`http://acs.amazonaws.com/groups/global/AllUsers` && Permission==`READ`]'"'"' --output text) ]]; then echo {} ; fi'
+
+# check for public facing s3 buckets, updated them to be private
+
+aws s3api list-buckets --query 'Buckets[*].[Name]' --output text | xargs -I {} bash -c 'if [[ $(aws s3api get-bucket-acl --bucket {} --query '"'"'Grants[?Grantee.URI==`http://acs.amazonaws.com/groups/global/AllUsers` && Permission==`READ`]'"'"' --output text) ]]; then aws s3api put-bucket-acl --acl "private" --bucket {} ; fi'
+
+# check for public facing s3 buckets (should be empty)
+
+aws s3api list-buckets --query 'Buckets[*].[Name]' --output text | xargs -I {} bash -c 'if [[ $(aws s3api get-bucket-acl --bucket {} --query '"'"'Grants[?Grantee.URI==`http://acs.amazonaws.com/groups/global/AllUsers` && Permission==`READ`]'"'"' --output text) ]]; then echo {} ; fi'
+```
+
+
+
+
 
 ## EC2
 
