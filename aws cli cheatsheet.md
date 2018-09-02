@@ -439,6 +439,9 @@ aws ec2 describe-images --filter "Name=is-public,Values=false" \
     --query 'Images[].[ImageId, Name]' \
     --output text | sort -k2
 
+# delete an AMI, by ImageId
+aws ec2 deregister-image --image-id ami-00000000
+
 ```
 
 
