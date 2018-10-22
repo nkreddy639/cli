@@ -478,10 +478,11 @@ aws ec2 describe-instance-status
 aws ec2 describe-instance-status \
     --instance-ids <instance_id>
     
-# list instance IP addresses
+# list all running instance, Name tag and Public IP Address
 aws ec2 describe-instances \
-  --query "Reservations[*].Instances[*].PublicIpAddress" \
-  --output=text
+  --filters Name=instance-state-name,Values=running \
+  --query 'Reservations[].Instances[].[PublicIpAddress, Tags[?Key==`Name`].Value | [0] ]' \
+  --output text | sort -k2
 ```
 
 
